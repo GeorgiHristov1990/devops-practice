@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lamp-app-deployment
+  labels:
+    app: lamp-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lamp-app
+  template:
+    metadata:
+      labels:
+        app: lamp-app
+    spec:
+      containers:
+      - name: lamp-app-container
+        image: image-name
+        #georgehristov/lamp-app:latest
+        ports:
+        - containerPort: 80
