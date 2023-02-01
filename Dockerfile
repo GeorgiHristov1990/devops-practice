@@ -16,7 +16,7 @@ RUN chown -R $(whoami):$(whoami) www
 WORKDIR /var/www/html
 
 #Clone source code
-RUN git clone https://github.com/qyjohn/simple-lamp
+COPY ./src .
 
 #RUN service mysql start
 
@@ -27,9 +27,6 @@ RUN touch bootstrap.sql && \
      echo "FLUSH PRIVILEGES;" >> bootstrap.sql && \
      /etc/init.d/mysql start && \
      mysql < bootstrap.sql
-    # ln -s /var/run/mysqld/mysqld.sock /tmp/mysql.sock
-
-WORKDIR simple-lamp
 
 RUN chown -R www-data:www-data uploads
 
@@ -38,7 +35,9 @@ RUN service mysql start && mysql -u username -ppassword simple_lamp < simple_lam
 EXPOSE 80
 
 COPY  startservices.sh startservices.sh
+
+RUN rm index.html
 RUN chmod +x startservices.sh
 
 # Set the script as the entry point
-ENTRYPOINT ["/var/www/html/simple-lamp/startservices.sh"]
+ENTRYPOINT ["/var/www/html/startservices.sh"]
