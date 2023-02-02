@@ -8,6 +8,10 @@
     }
   }
 
+  // parameters {
+  //   string(name: 'imageName', defaultValue: 'my-image', description: 'The name of the image to be built')
+  // }
+
 pipeline {
   agent any
   
@@ -16,6 +20,7 @@ pipeline {
     stage('Build') { 
       steps {
         echo "building from dev.."
+        sh "docker build -t georgehristov/lamp-app:$BUILD_NUMBER ."
       }
     }
     stage('Test') { 
@@ -23,7 +28,7 @@ pipeline {
         echo "testing from dev.."
       }
     }
-       stage('Deploy') {
+    stage('Deploy') {
       when {
         allOf {
           // changeRequest()
@@ -31,13 +36,6 @@ pipeline {
         }
       }
       steps {
-        // step { 
-        //   if (branch == "main") {
-        //     echo 'This is from main'
-        //   } else {
-        //     echo 'This is from dev'
-        //   }
-        // }
         echo "deploying from dev.."
       }
     }
