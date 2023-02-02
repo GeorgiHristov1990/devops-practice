@@ -15,22 +15,21 @@ pipeline {
   stages {
     stage('Build') { 
       steps {
-        echo "building.."
+        echo "building from dev.."
       }
     }
     stage('Test') { 
       steps {
-        echo "testing.."
+        echo "testing from dev.."
       }
     }
        stage('Deploy') {
-      // when {
-      //   allOf {
-      //     // changeRequest()
-      //     // expression { return (branch == "main" || branch == "dev") }
-      //     expression { return (BRANCH_NAME == "dev") }
-      //   }
-      // }
+      when {
+        allOf {
+          // changeRequest()
+          expression { return (BRANCH_NAME == "main") }
+        }
+      }
       steps {
         // step { 
         //   if (branch == "main") {
@@ -39,7 +38,7 @@ pipeline {
         //     echo 'This is from dev'
         //   }
         // }
-        echo "deploying.."
+        echo "deploying from dev.."
       }
     }
   }
