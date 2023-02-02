@@ -20,7 +20,6 @@ pipeline {
     stage('Build') { 
       steps {
         echo "building from dev.."
-        sh "docker build -t georgehristov/lamp-app:$BUILD_NUMBER ."
       }
     }
     stage('Test') { 
@@ -28,6 +27,14 @@ pipeline {
         echo "testing from dev.."
       }
     }
+    stage('Build and Push Docker image') { 
+      steps {
+        echo "testing from dev.."
+        sh "docker build -t georgehristov/lamp-app:$BUILD_NUMBER ."
+
+      }
+    }
+     
     stage('Deploy') {
       when {
         allOf {
