@@ -160,7 +160,8 @@ if (isset($_SESSION['username']))
 	echo "</tr>";
 	echo "</table>";
 	echo "<HR>";
-
+	
+	echo "This is updated version of file"
 	echo "In this demo, we assume that you are uploading images files with file extensions such as JPG, JPEG, GIF, PNG.<br>&nbsp;<br>";
 
 	echo "<form action='index.php' method='post' enctype='multipart/form-data'>";
