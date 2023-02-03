@@ -30,7 +30,7 @@ pipeline {
     stage('Build and Push Docker image') { 
       steps {
         echo "testing from dev.."
-        sh "docker build -t georgehristov/lamp-app:$BUILD_NUMBER ."
+        sh "docker build -t georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER ."
 
       }
     }
@@ -44,6 +44,10 @@ pipeline {
       }
       steps {
         echo "deploying from dev.."
+        echo "removing old container.."
+        sh "docker rm -f georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
+        echo "starting new container.."
+        sh "docker run -dp 81:80 georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
       }
     }
   }
