@@ -38,7 +38,6 @@ COPY  startservices.sh startservices.sh
 
 RUN rm index.html
 RUN chmod +x startservices.sh
-RUN mv index.php index.html
 
 # Set the script as the entry point
 ENTRYPOINT ["/var/www/html/startservices.sh"]
