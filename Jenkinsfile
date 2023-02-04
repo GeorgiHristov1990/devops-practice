@@ -45,7 +45,7 @@ pipeline {
       steps {
         echo "deploying from dev.."
         echo "removing old container.."
-        sh "docker rm -f georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
+        sh "docker rm -f $(docker ps -aq)"
         echo "starting new container.."
         sh "docker run -dp 81:80 georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
       }
