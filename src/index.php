@@ -161,7 +161,6 @@ if (isset($_SESSION['username']))
 	echo "</table>";
 	echo "<HR>";
 
-	echo "This is an updated version";
 	echo "In this demo, we assume that you are uploading images files with file extensions such as JPG, JPEG, GIF, PNG.<br>&nbsp;<br>";
 
 	echo "<form action='index.php' method='post' enctype='multipart/form-data'>";
@@ -233,6 +232,7 @@ else if ($storage_option == "s3")
 $session_id = session_id();
 echo "<hr>";
 echo "Session ID: ".$session_id;
+echo "v2";
 echo "</body>";
 echo "</html>";
 ?>
