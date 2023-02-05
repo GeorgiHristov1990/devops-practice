@@ -232,7 +232,8 @@ else if ($storage_option == "s3")
 $session_id = session_id();
 echo "<hr>";
 echo "Session ID: ".$session_id;
-echo "v2";
+echo "<hr>";
+echo "v3";
 echo "</body>";
 echo "</html>";
 ?>
