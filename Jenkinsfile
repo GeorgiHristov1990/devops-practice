@@ -48,7 +48,7 @@ pipeline {
       when {
         allOf {
           // changeRequest()
-          expression { return (BRANCH_NAME == "main") }
+          expression { return (BRANCH_NAME == "dev") }
         }
       }
       steps {
