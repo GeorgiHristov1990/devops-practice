@@ -15,6 +15,7 @@
 pipeline {
   agent any
   
+  env.IMAGE_NAME = "georgehristov/lamp-app:$BRANCH_NAME-$GIT_COMMIT-$BUILD_NUMBER"
 
   stages {
     stage('Build') { 
@@ -30,7 +31,7 @@ pipeline {
     stage('Build and Push Docker image') { 
       steps {
         echo "testing from dev.."
-        sh "docker build -t georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER ."
+        sh "docker build -t ${env.IMAGE_NAME} ."
 
       }
     }
@@ -45,9 +46,9 @@ pipeline {
       steps {
         echo "deploying from dev.."
         echo "removing old container.."
-        sh "docker rm -f \$(docker ps -aq)"
+        sh "docker rm -f lamp-app"
         echo "starting new container.."
-        sh "docker run -dp 81:80 georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
+        sh "docker run -dp 81:80 --name lamp-app ${env.IMAGE_NAME}"
       }
     }
   }
