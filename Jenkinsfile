@@ -18,13 +18,15 @@ def imageName = "georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER"
 pipeline {
   agent any
   
+  environment {
+      DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+  }
+
 
   stages {
     stage('Build') { 
       steps {
         echo "building from dev.."
-        echo "$imageName"
-        // echo "${env.GIT_COMMIT}"
       }
     }
     stage('Test') { 
@@ -36,7 +38,9 @@ pipeline {
       steps {
         echo "testing from dev.."
         sh "docker build -t ${imageName} ."
-
+        sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+        sh "docker push ${imageName}"
+        sh "docker rmi ${imageName}"
       }
     }
      
