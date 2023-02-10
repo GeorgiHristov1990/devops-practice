@@ -233,7 +233,7 @@ $session_id = session_id();
 echo "<hr>";
 echo "Session ID: ".$session_id;
 echo "<hr>";
-echo "v3";
+echo "v3.1";
 echo "</body>";
 echo "</html>";
 ?>
