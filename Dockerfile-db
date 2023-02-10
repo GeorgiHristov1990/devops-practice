@@ -1,0 +1,4 @@
+FROM mariadb:10.5.2
+
+COPY ./simple_lamp.sql /docker-entrypoint-initdb.d
+RUN chmod +x /docker-entrypoint-initdb.d/simple_lamp.sql

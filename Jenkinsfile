@@ -1,3 +1,4 @@
+
 def imageName = "georgehristov/lamp-app:$BRANCH_NAME-$BUILD_NUMBER" 
 
 pipeline {
@@ -50,7 +51,7 @@ pipeline {
           sh "echo /${imageName}/"
           sh "pwd"
           sh "sed -i \"s|image-name|${imageName}|g\" ./k8s-specifications/deployment.yml"
-          // step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+          step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'k8s-specifications/deployment.yml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
       }
     }
 

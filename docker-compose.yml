@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  php-httpd:
+    build:
+      context: .
+      dockerfile: Dockerfile-phphttpd
+    ports:
+      - 80:80
+    links:
+      - database:db
+ 
+  database:
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+ 
+    environment:
+      TZ: "Europe/Sofia"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "rootpass"
+      MYSQL_DATABASE: "simple_lamp"
+      MYSQL_USER: "username"
+      MYSQL_PASSWORD: "password"

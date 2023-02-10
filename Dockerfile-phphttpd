@@ -1,0 +1,20 @@
+FROM php:7.3-apache
+
+RUN apt-get update && \
+    docker-php-ext-install pdo_mysql
+
+RUN service apache2 restart
+
+WORKDIR /var
+
+RUN chown -R $(whoami):$(whoami) www
+
+WORKDIR /var/www/html
+
+COPY ./src ./simple-lamp
+
+WORKDIR simple-lamp
+
+RUN sed -i 's/localhost/database/g' config.php
+
+RUN chown -R www-data:www-data uploads
