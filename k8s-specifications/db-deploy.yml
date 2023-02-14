@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: lamp-app-db-deployment
+  labels:
+    name: lamp-app-db-deployment
+    app: lamp-app
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lamp-app
+      name: lamp-app-db-pod
+
+  template:
+    metadata:
+      name: lamp-app-db-pod
+      labels:
+        name: lamp-app-db-pod
+        app: lamp-app
+    spec:
+      containers:
+      - name: lamp-app-db
+        image: georgehristov/lamp-app_db
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "yes"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpass"
+        - name: MYSQL_DATABASE
+          value: "simple_lamp"
+        - name: MYSQL_USER
+          value: "username"
+        - name: MYSQL_PASSWORD
+          value: "password"
+        - name: TZ
+          value: "Europe/Sofia"
+

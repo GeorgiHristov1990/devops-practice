@@ -13,17 +13,6 @@ pipeline {
   }
 
 
-  stages {
-    stage('Build') { 
-      steps {
-        echo "nothing to build.."
-      }
-    }
-    stage('Test') { 
-      steps {
-        echo " nothing to test yet.."
-      }
-    }
     stage('Build and Push Docker image') { 
       steps {
         echo "building image and pushing.."
@@ -35,11 +24,6 @@ pipeline {
     }
      
     stage('Deploy') {
-      when {
-        allOf {
-          expression { return (BRANCH_NAME == "dev") }
-        }
-      }
       // steps {
       //   echo "deploying.."
       //   echo "removing old container.."
