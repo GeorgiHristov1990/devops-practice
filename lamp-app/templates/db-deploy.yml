@@ -9,7 +9,7 @@ metadata:
     app: lamp-app
 
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount.db }}
   selector:
     matchLabels:
       app: lamp-app
@@ -23,8 +23,8 @@ spec:
         app: lamp-app
     spec:
       containers:
-      - name: lamp-app-db
-        image: georgehristov/lamp-app_db
+      - name: database
+        image: {{ .Values.image.db.repository }}
         ports:
         - containerPort: 3306
         env:

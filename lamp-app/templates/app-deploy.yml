@@ -1,0 +1,28 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lamp-app-apache-php
+  labels:
+    app: lamp-app
+spec:
+  replicas: {{ .Values.replicaCount.app }}
+  selector:
+    matchLabels:
+      app: lamp-app
+      name: lamp-app-apache-php-pod
+
+  template:
+    metadata:
+      name: lamp-app-apache-php-pod
+      labels:
+        app: lamp-app
+        name: lamp-app-apache-php-pod
+
+    spec:
+      containers:
+      - name: lamp-app-container
+        image:  {{ .Values.image.app.repository }}
+        
+        ports:
+        - containerPort: 80
