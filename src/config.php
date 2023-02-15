@@ -1,6 +1,6 @@
 <?php
 // Database connection parameters
-$db_hostname = "localhost";
+$db_hostname = "db";
 $db_port     = 3306;
 $db_database = "simple_lamp";
 $db_username = "username";

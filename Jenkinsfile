@@ -17,19 +17,17 @@ pipeline {
   stage('Build and Push Docker image') { 
     steps {
       echo "building image and pushing.."
-      script {
-          docker build -f Dockerfile-phphttpd -t ${app_image}:${tag} .
-          docker build -f Dockerfile-phphttpd -t ${app_image}:latest .
-          docker build -f Dockerfile-db -t ${db_image}:${tag} .
-          docker build -f Dockerfile-db -t ${db_image}:latest .
-          echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username $DOCKERHUB_CREDENTIALS_USR --password-stdin
-          echo $(id)
-          echo $(pwd)
-          docker push ${app_image}:${tag}
-          docker push ${app_image}
-          docker push ${db_image}:${tag}
-          docker push ${db_image}
-        }
+      sh "docker build -f Dockerfile-phphttpd -t ${app_image}:${tag} ."
+      sh "docker build -f Dockerfile-phphttpd -t ${app_image}:latest ."
+      sh "docker build -f Dockerfile-db -t ${db_image}:${tag} ."
+      sh "docker build -f Dockerfile-db -t ${db_image}:latest ."
+      sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+      sh "echo \$(id)"
+      sh "echo \$(pwd)"
+      sh "docker push ${app_image}:${tag}"
+      sh "docker push ${app_image}"
+      sh "docker push ${db_image}:${tag}"
+      sh "docker push ${db_image}"
       // sh "docker rmi ${imageName}"
     }
   }

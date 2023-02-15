@@ -23,7 +23,7 @@ spec:
         app: lamp-app
     spec:
       containers:
-      - name: lamp-app-db
+      - name: database
         image: georgehristov/lamp-app_db
         ports:
         - containerPort: 3306

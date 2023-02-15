@@ -7,14 +7,14 @@ services:
       dockerfile: Dockerfile-phphttpd
     ports:
       - 80:80
-    links:
-      - database:db
+    # links:
+    #   - database
  
   database:
     build:
       context: .
       dockerfile: Dockerfile-db
- 
+
     environment:
       TZ: "Europe/Sofia"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -22,3 +22,6 @@ services:
       MYSQL_DATABASE: "simple_lamp"
       MYSQL_USER: "username"
       MYSQL_PASSWORD: "password"
+
+    depends_on:
+      - php-httpd
