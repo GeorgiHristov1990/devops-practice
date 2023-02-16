@@ -35,6 +35,7 @@ pipeline {
   stage('Deploy') {
     steps {
       sh "echo deploying.."
+      sh "gcloud container clusters get-credentials lamp-app-2-tier --zone europe-central2-a --project optimistic-balm-374117"
     }
   }
 

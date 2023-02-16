@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: db
   labels:
-    app: lamp-app
+    app: {{ .Chart.Name }}
 spec:
   type: ClusterIP
   ports:
@@ -11,5 +11,5 @@ spec:
     targetPort: 3306
     protocol: TCP
   selector:
-    app: lamp-app
+    app: {{ .Chart.Name }}
     name: lamp-app-db-pod

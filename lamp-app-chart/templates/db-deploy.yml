@@ -6,13 +6,13 @@ metadata:
   name: lamp-app-db-deployment
   labels:
     name: lamp-app-db-deployment
-    app: lamp-app
+    app: {{ .Chart.Name }}
 
 spec:
   replicas: {{ .Values.replicaCount.db }}
   selector:
     matchLabels:
-      app: lamp-app
+      app: {{ .Chart.Name }}
       name: lamp-app-db-pod
 
   template:
@@ -20,7 +20,7 @@ spec:
       name: lamp-app-db-pod
       labels:
         name: lamp-app-db-pod
-        app: lamp-app
+        app: {{ .Chart.Name }}
     spec:
       containers:
       - name: database

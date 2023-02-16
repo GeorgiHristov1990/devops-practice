@@ -4,19 +4,19 @@ kind: Deployment
 metadata:
   name: lamp-app-apache-php
   labels:
-    app: lamp-app
+    app: {{ .Chart.Name }}
 spec:
   replicas: {{ .Values.replicaCount.app }}
   selector:
     matchLabels:
-      app: lamp-app
+      app: {{ .Chart.Name }}
       name: lamp-app-apache-php-pod
 
   template:
     metadata:
       name: lamp-app-apache-php-pod
       labels:
-        app: lamp-app
+        app: {{ .Chart.Name }}
         name: lamp-app-apache-php-pod
 
     spec:
